@@ -37,21 +37,29 @@
     </div>
     @endif
     
-    <div class="content pt-3">
+    <div class="content-header pt-3">
       <!-- Main content -->
       <div class="container-fluid pb-1">
         <div class="title">
           <h3>@yield('title', 'Manager')</h3>
         </div>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+          @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
+          </div>
         </div>
-        @endif
       </div>
       @yield('content')
       <!-- /.content -->

@@ -14,6 +14,9 @@ class MemberController extends Controller
     public function __construct(UserService $user){
         $this->user = $user;
     }
+    public function index(){
+        return view('view.member.index');
+    }
     public function create(){
         return view('view.member.create');
     }

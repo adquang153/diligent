@@ -12,9 +12,18 @@
 
 <script>
     $(function(){
-        $('.nav-sidebar > li > a').each(function(){
-            if( location.href.includes( $(this).attr('data-active').trim().toLowerCase() ) )
-                $(this).addClass('active');
+        $('.nav-sidebar > li a').each(function(){
+            let active = $(this).attr('data-active');
+            if(active)
+                if( location.href.includes( active.trim().toLowerCase() ) )
+                    $(this).addClass('active')
+                            .parents('.nav-treeview')
+                            .css('display','block')
+                            .parents('.has-treeview')
+                            .addClass('menu-open')
+                            .children('a')
+                            .first()
+                            .addClass('active');
         });
         if($('.nav-sidebar > li').find('a.active').length === 0)
             $('.nav-sidebar > li > a:first').addClass('active');

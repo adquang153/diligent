@@ -13,6 +13,6 @@ class LeaveForm extends Model
     protected $fillable = ['user_id', 'content', 'day_off', 'status'];
 
     public function user(){
-        return $this->belongsTo('App\Models\Contract');
+        return $this->belongsTo('App\Models\User');
     }
 }

@@ -32,22 +32,62 @@
             </a>
           </li>
           @if(auth()->user()->user_type === \App\Models\User::MANAGER)
-          <li class="nav-item">
-            <a href="" class="nav-link" data-active="zxc">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link" data-active="">
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                  Cấp tài khoản
+                  Quản lý nhân viên
+                  <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('member.index')}}" class="nav-link" data-active="member/index">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách nhân viên</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('member.create')}}" class="nav-link" data-active="member/create">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cấp tài khoản</p>
+                </a>
+              </li>
+            </ul>
           </li>
           @endif
           <li class="nav-item">
             <a href="{{route('calendar')}}" class="nav-link" data-active="Calendar">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                   Lịch làm việc
               </p>
             </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Quản lý nghỉ phép
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('leave-form.create')}}" class="nav-link" data-active="leave-form/create">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Viết đơn nghỉ phép</p>
+                </a>
+              </li>
+              @if(auth()->user()->user_type == \App\Models\User::MANAGER)
+              <li class="nav-item">
+                <a href="{{route('leave-form.wait')}}" class="nav-link" data-active="leave-form/wait">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách chờ</p>
+                </a>
+              </li>
+              @endif
+            </ul>
           </li>
         </ul>
       </nav>
