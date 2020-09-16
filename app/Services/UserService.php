@@ -12,6 +12,11 @@ class UserService{
         return User::create($data);
     }
 
+    public function getAll(){
+        $list = User::where('user_type', User::MEMBER)->orderBy('full_name', 'desc')->paginate(15);
+        return $list;
+    }
+
 }
 
 ?>

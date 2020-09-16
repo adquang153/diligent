@@ -35,4 +35,7 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
 
     Route::get('/leave-form/wait', 'LeaveFormController@waiting')->name('leave-form.wait');
     Route::post('/leave-form/action', 'LeaveFormController@action')->name('leave-form.action');
+
+    // Work
+    Route::post('/meeting', 'WorkController@meeting')->name('work.meeting');
 });

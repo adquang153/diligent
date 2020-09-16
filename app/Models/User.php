@@ -48,4 +48,26 @@ class User extends Authenticatable
         }
         return 'nhân viên';
     }
+
+    public function works(){
+        return $this->hasMany('App\Models\Work');
+    }
+
+    public function calendar()
+    {
+        return $this->belongsToMany('App\Models\Calendar', 'works', 'user_id', 'calendar_id');
+    }
+
+    public function checkMeeting(){
+        return $this->calendar()
+        ->whereDate('workday', Date('Y-m-d'))
+        ->where('start_time', '<=', Date('H:i:s'))
+        ->where('end_time','>=',Date('H:i:s'))
+        ->first();
+    }
+
+    public function work_info(){
+        return $this->hasMany('App\Models\WorkInfo');
+    }
+
 }

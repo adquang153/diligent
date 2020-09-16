@@ -15,7 +15,8 @@ class MemberController extends Controller
         $this->user = $user;
     }
     public function index(){
-        return view('view.member.index');
+        $list = $this->user->getAll();
+        return view('view.member.index', compact('list'));
     }
     public function create(){
         return view('view.member.create');
