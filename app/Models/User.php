@@ -60,14 +60,36 @@ class User extends Authenticatable
 
     public function checkMeeting(){
         return $this->calendar()
-        ->whereDate('workday', Date('Y-m-d'))
-        ->where('start_time', '<=', Date('H:i:s'))
-        ->where('end_time','>=',Date('H:i:s'))
-        ->first();
+                ->whereDate('workday', Date('Y-m-d'))
+                ->where('start_time', '<=', Date('H:i:s'))
+                ->where('end_time','>=',Date('H:i:s'))
+                ->first();
     }
 
     public function work_info(){
         return $this->hasMany('App\Models\WorkInfo');
+    }
+
+    public function workInfo($type=""){
+        $checkMeeting = $this->checkMeeting();
+        if($checkMeeting){
+            $work_id = Work::select('id')->where('user_id', $this->id)->where('calendar_id', $checkMeeting->id)->first()->id;
+            $work_info = WorkInfo::select('id','meeting','report','content')->where('user_id', $this->id)->where('work_id', $work_id)->first();
+            if($type === 'info')
+                return $work_info;
+            if(!$work_info){
+                // Chưa meeting thì trả về 1
+                return 1;
+            }
+            if(!$work_info->report){
+                // Đã meeting nhưng chưa report thì trả về 0
+                return 0;
+            }
+            // Đã hết cả làm thì trả về 2
+            return 2;
+        }
+        // Không có ca làm việc hiện tại thì trả về -1
+        return -1;
     }
 
 }

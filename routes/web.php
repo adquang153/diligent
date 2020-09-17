@@ -37,5 +37,5 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     Route::post('/leave-form/action', 'LeaveFormController@action')->name('leave-form.action');
 
     // Work
-    Route::post('/meeting', 'WorkController@meeting')->name('work.meeting');
+    Route::post('/work/diligent', 'WorkController@diligent')->name('work.diligent');
 });

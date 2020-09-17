@@ -17,8 +17,8 @@ class CreateWorkInfoTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('work_id');
-            $table->time('start_time');
-            $table->time('end_time')->nullable();
+            $table->time('meeting');
+            $table->time('report')->nullable();
             $table->text('content');
             $table->timestamps();
             

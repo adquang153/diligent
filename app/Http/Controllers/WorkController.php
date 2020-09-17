@@ -14,14 +14,23 @@ class WorkController extends Controller
         $this->work = $work;
     }
 
-    public function meeting(Request $request){
+    public function diligent(Request $request){
         $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'type' => 'required|in:meeting,report'
         ]);
-        $result = $this->work->meeting($request->content);
-        if($result){
-            return redirect()->route('dashboard');
+        if($request->type === 'meeting'){
+            $result = $this->work->meeting($request->content);
+            if($result)
+                return redirect()->route('dashboard')->with('success', 'Đã meeting!');
+            return redirect()->back()->with('error', 'Bạn không trong ca làm việc này!');
         }
-        return redirect()->back()->with('error', 'Bạn không trong ca làm việc này!');
+        else{
+            $result = $this->work->report($request->content);
+            if($result)
+                return redirect()->route('dashboard')->with('success', 'Đã report!');
+            return redirect()->back()->with('error', 'Đã quá giờ làm, không thể report!');
+        }
+        
     }
 }
