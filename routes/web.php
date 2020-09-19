@@ -38,4 +38,5 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
 
     // Work
     Route::post('/work/diligent', 'WorkController@diligent')->name('work.diligent');
+    Route::get('/works', 'WorkController@index')->name('work.index');
 });

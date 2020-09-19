@@ -14,6 +14,10 @@ class WorkController extends Controller
         $this->work = $work;
     }
 
+    public function index(){
+        return view('view.work.index');
+    }
+
     public function diligent(Request $request){
         $request->validate([
             'content' => 'required',

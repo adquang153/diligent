@@ -89,6 +89,30 @@
               @endif
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <!-- <i class="nav-icon fas fa-money-check-alt"></i> -->
+              <i class="nav-icon fab fa-delicious"></i>
+              <p>
+                Quản lý chuyên cần
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('work.index')}}" class="nav-link" data-active="works">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Số ca làm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('work.index')}}" class="nav-link" data-active="works">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Số đơn nghỉ phép</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

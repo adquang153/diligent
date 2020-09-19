@@ -33,7 +33,7 @@
                   </div>
                 </form>
             </div>
-          @else($check === 2)
+          @elseif($check === 2)
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Hôm nay: {{Date('d/m/Y')}}</h3>
@@ -46,7 +46,7 @@
             </div>
             <div class="card-body">
               <ul class="pl-3">
-              <?php $workHistory = auth()->user()->workInfo('info'); ?>
+              <?php $workHistory = auth()->user()->workInfo('info');?>
                 <li class="mb-2">Meeting lúc: {{Date('H:i', strtotime($workHistory->meeting))}}</li>
                 <li class="mb-2">Đã report lúc: {{Date('H:i', strtotime($workHistory->report))}}</li>
                 <li class="">Nội dung làm việc hôm nay:</li>
