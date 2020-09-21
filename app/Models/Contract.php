@@ -10,7 +10,7 @@ class Contract extends Model
     use HasFactory;
 
     protected $table = 'contracts';
-    protected $fillable = ['user_id', 'contract_type', 'salary', 'date_start', 'date_end'];
+    protected $fillable = ['user_id', 'role', 'salary', 'date_start', 'date_end'];
 
 
     public function user(){

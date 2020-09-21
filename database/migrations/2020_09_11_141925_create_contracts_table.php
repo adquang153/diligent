@@ -16,7 +16,7 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('contract_type');
+            $table->string('role');
             $table->unsignedBigInteger('salary')->default(0);
             $table->date('date_start');
             $table->date('date_end');

@@ -17,6 +17,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">{{auth()->user()->full_name}}</a>
+          <a href="javascript:void(0)" class="font-14 text-white online">{{optional(auth()->user()->contract)->role ?? auth()->user()->user_type}}</a>
         </div>
       </div>
       <nav class="mt-2">
@@ -102,15 +103,10 @@
               <li class="nav-item">
                 <a href="{{route('work.index')}}" class="nav-link" data-active="works">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Số ca làm</p>
+                  <p>Thống kê</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{route('work.index')}}" class="nav-link" data-active="works">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Số đơn nghỉ phép</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
         </ul>

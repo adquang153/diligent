@@ -68,7 +68,10 @@
           <i class="far fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
-          <a href="javascript:document.querySelector('#logout-form').submit()" class="dropdown-item text-center">
+          <a href="{{route('member.me')}}" class="dropdown-item text-left">
+            Profile
+          </a>
+          <a href="javascript:document.querySelector('#logout-form').submit()" class="dropdown-item text-left">
             Logout
             <i class="fas fa-sign-out-alt ml-2"></i>
           </a>

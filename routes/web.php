@@ -27,6 +27,7 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     Route::get('/member/index', 'MemberController@index')->name('member.index');
     Route::get('/member/create', 'MemberController@create')->name('member.create');
     Route::post('/member/store', 'MemberController@store')->name('member.store');
+    Route::get('/me', 'MemberController@me')->name('member.me');
 
     // Leave form
     Route::get('/leave-form', 'LeaveFormController@index')->name('leave-form');

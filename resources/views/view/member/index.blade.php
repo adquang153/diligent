@@ -22,7 +22,7 @@
                       <th>Ảnh</th>
                       <th>Nhân viên</th>
                       <th>Email</th>
-                      <th>Phone</th>
+                      <th>Chức vụ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -34,7 +34,7 @@
                             <td><img src="{{asset($item->avatar ?? 'images/user.png')}}" class="avt-40" alt="avatar"></td>
                             <td>{{$item->full_name}}</td>
                             <td>{{$item->email}}</td>
-                            <td>{{$item->phone}}</td>
+                            <td>{{optional($item->contract)->role}}</td>
                         </tr>
                         @endforeach
                     @endif

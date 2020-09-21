@@ -9,7 +9,16 @@ class UserService{
 
     public function create($data){
         $data['password'] = Hash::make($data['password']);
-        return User::create($data);
+        $user = User::create($data);
+        if($user){
+            return $user->contract()->create([
+                'role' => $data['role'],
+                'salary' => $data['salary'],
+                'date_start' => $data['date_start'],
+                'date_end' => $data['date_end']
+            ]);
+        }
+        return false;
     }
 
     public function getAll(){

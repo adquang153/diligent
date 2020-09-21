@@ -92,4 +92,12 @@ class User extends Authenticatable
         return -1;
     }
 
+    public function leaveForm(){
+        return $this->hasOne('App\Models\LeaveForm');
+    }
+
+    public function contract(){
+        return $this->hasOne('App\Models\Contract');
+    }
+
 }

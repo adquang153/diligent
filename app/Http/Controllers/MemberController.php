@@ -29,4 +29,9 @@ class MemberController extends Controller
         }
         return redirect()->back()->with('error', 'Lỗi khi tạo '.$user->position);
     }
+
+    public function me(){
+        return view('view.member.profile');
+    }
+
 }

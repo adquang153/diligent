@@ -39,6 +39,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Chức vụ') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
@@ -69,6 +82,36 @@
                                    <option value="manager">Quản lý</option>
                                    <option value="member" {{old('user_type') === 'member' ? 'selected' : ''}}>Nhân viên</option>
                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Mức lương') }}</label>
+
+                            <div class="col-md-6">
+                                <label for="salary" class="d-flex align-items-center">
+                                    <input type="number" min="0" id="salary" name="salary" value="{{old('salary')}}" class="form-control d-inline mr-2 w-50"> <sup>đ</sup> / Tháng
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-6 col-form-label text-center">{{ __('Thời hạn hợp đồng:') }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Từ') }}</label>
+
+                            <div class="col-md-6">
+                                <label class="d-flex align-items-center">
+                                    <input type="date" name="date_start" value="{{old('date_start')}}" class="form-control d-inline mr-2 w-50">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Đến') }}</label>
+
+                            <div class="col-md-6">
+                                <label class="d-flex align-items-center">
+                                    <input type="date" name="date_end" value="{{old('date_end')}}" class="form-control d-inline mr-2 w-50">
+                                </label>
                             </div>
                         </div>
 
