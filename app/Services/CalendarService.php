@@ -15,7 +15,9 @@ class CalendarService{
                             ->get();
         $arr = [];
         for( $i = 1; $i <= Date('t'); $i++){
-            array_push($arr, ['workday' => Date( 'Y-m-' . $i ), 'count' => 0]);
+            $day = "0". $i;
+            $day = substr($day, -2);
+            array_push($arr, ['workday' => Date( 'Y-m-' . $day ), 'count' => 0]);
         }
         $list = $list->toArray();
         if(!empty($list) && count($list))
