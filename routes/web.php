@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     Route::get('/', 'HomeController@index')->name('dashboard');
+
+    // Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
+    Route::get('calendar/{date}', 'CalendarController@info')->name('calendar.info');
 
     // Member
     Route::get('/member/index', 'MemberController@index')->name('member.index');

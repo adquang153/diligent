@@ -12,4 +12,8 @@ class Calendar extends Model
     protected $table = 'calendars';
     protected $fillable = ['start_time', 'end_time', 'workday', 'total'];
 
+
+    public function works(){
+        return $this->hasMany('App\Models\Work');
+    }
 }

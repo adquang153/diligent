@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col-8 mx-auto">
             <div class="card">
                 <div class="card-header">
                 <h3 class="card-title">Tháng: {{Date('m/Y')}}</h3>
@@ -21,18 +21,20 @@
                     <li class="">Số ca đã làm: {{auth()->user()->work_info()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count()}}</li>
                     <li class="">Số đơn xin phép được duyệt: {{auth()->user()->leaveForm()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->where('status', 1)->count()}}</li>
                     <li class="">Số đơn xin phép đang chờ: {{auth()->user()->leaveForm()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->where('status', 0)->count()}}</li>
+                </ul>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer ">
                     <?php 
                         $user = auth()->user();
                         $salary = optional($user->contract)->salary ?? 0;
                         $money = $salary / 30;
                         $money_total = $money * $user->works()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count();
                     ?>
-                    <li>Tổng lương: {{number_format($money_total, 2)}} <sup>đ</sup></li>
-                </ul>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-coins mr-2"></i> Ứng lương </a>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-0">Tổng lương: {{number_format($money_total, 2)}} <sup>đ</sup></p>
+                        <a href="" class="btn btn-danger btn-sm"><i class="fas fa-coins mr-2"></i> Ứng lương </a>
+                    </div>
                 </div>
                 <!-- /.card-footer-->
             </div>
