@@ -38,6 +38,42 @@ class CalendarService{
         return $list;
     }
 
+    public function createCalendar($date, $data){
+        $data['workday'] = $date;
+        $calendar = Calendar::create($data);
+        if($calendar && count($data['users'] ?? []) > 0){
+            $calendar->members()->sync($data['users']);
+        }
+        return $calendar;
+    }
+
+    public function deleteCalendar($id){
+        $calendar = $this->findCalendar($id);
+        return $calendar->delete();
+    }
+
+    public function findCalendar($id){
+        $calendar = Calendar::with('works')->find($id);
+        return $calendar;
+    }
+
+    public function updateCalendar($id, $data){
+        $calendar = $this->findCalendar($id);
+        $time = Date('Y-m-d H:i:s', strtotime( $calendar->workday . $calendar->start_time ));
+        
+        // Nếu thời gian bắt đầu ca lớn hơn thời gian hiện tại thì không cho sửa
+        if($time < Date('Y-m-d H:i:s'))
+            return false;
+        if($calendar){
+            $calendar->update($data);
+            if($calendar && count($data['users'] ?? []) > 0){
+                $calendar->members()->sync($data['users']);
+            }
+            return $calendar;
+        }
+        return false;
+    }
+
 }
 
 ?>

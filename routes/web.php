@@ -25,6 +25,11 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     // Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
     Route::get('calendar/{date}', 'CalendarController@info')->name('calendar.info');
+    Route::get('calendar/{date}/create', 'CalendarController@create')->name('calendar.create');
+    Route::post('calendar/{date}/store', 'CalendarController@store')->name('calendar.store');
+    Route::get('calendar/edit/{id}', 'CalendarController@edit')->name('calendar.edit');
+    Route::post('calendar/update/{id}', 'CalendarController@update')->name('calendar.update');
+    Route::delete('calendar/delete/{id}', 'CalendarController@delete')->name('calendar.delete');
 
     // Member
     Route::get('/member/index', 'MemberController@index')->name('member.index');

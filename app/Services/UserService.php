@@ -21,8 +21,12 @@ class UserService{
         return false;
     }
 
-    public function getAll(){
-        $list = User::where('user_type', User::MEMBER)->orderBy('full_name', 'desc')->paginate(15);
+    public function getAll($params=[]){
+        $list = User::where('user_type', User::MEMBER)->orderBy('full_name', 'desc');
+        if(isset($params['all']))
+            $list = $list->get();
+        else
+            $list = $list->paginate(15);
         return $list;
     }
 

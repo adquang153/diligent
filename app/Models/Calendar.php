@@ -16,4 +16,8 @@ class Calendar extends Model
     public function works(){
         return $this->hasMany('App\Models\Work');
     }
+
+    public function members(){
+        return $this->belongsToMany('App\Models\User', 'works', 'calendar_id', 'user_id');
+    }
 }
