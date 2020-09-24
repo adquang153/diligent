@@ -25,16 +25,9 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     // Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
     Route::get('calendar/{date}', 'CalendarController@info')->name('calendar.info');
-    Route::get('calendar/{date}/create', 'CalendarController@create')->name('calendar.create');
-    Route::post('calendar/{date}/store', 'CalendarController@store')->name('calendar.store');
-    Route::get('calendar/edit/{id}', 'CalendarController@edit')->name('calendar.edit');
-    Route::post('calendar/update/{id}', 'CalendarController@update')->name('calendar.update');
-    Route::delete('calendar/delete/{id}', 'CalendarController@delete')->name('calendar.delete');
+   
 
     // Member
-    Route::get('/member/index', 'MemberController@index')->name('member.index');
-    Route::get('/member/create', 'MemberController@create')->name('member.create');
-    Route::post('/member/store', 'MemberController@store')->name('member.store');
     Route::get('/me', 'MemberController@me')->name('member.me');
 
     // Leave form
@@ -42,10 +35,30 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     Route::get('/leave-form/create', 'LeaveFormController@create')->name('leave-form.create');
     Route::post('/leave-form/store', 'LeaveFormController@store')->name('leave-form.store');
 
-    Route::get('/leave-form/wait', 'LeaveFormController@waiting')->name('leave-form.wait');
-    Route::post('/leave-form/action', 'LeaveFormController@action')->name('leave-form.action');
-
     // Work
     Route::post('/work/diligent', 'WorkController@diligent')->name('work.diligent');
     Route::get('/works', 'WorkController@index')->name('work.index');
+
+    Route::middleware('manager')->group(function(){
+        
+        // Member
+        Route::get('/member/index', 'MemberController@index')->name('member.index');
+        Route::get('/member/create', 'MemberController@create')->name('member.create');
+        Route::post('/member/store', 'MemberController@store')->name('member.store');
+        Route::get('/member/profile/{id}', 'MemberController@profile')->name('member.profile');
+
+        // Calendar
+        Route::get('calendar/edit/{id}', 'CalendarController@edit')->name('calendar.edit');
+        Route::get('calendar/{date}/create', 'CalendarController@create')->name('calendar.create');
+        Route::post('calendar/{date}/store', 'CalendarController@store')->name('calendar.store');
+        Route::post('calendar/update/{id}', 'CalendarController@update')->name('calendar.update');
+        Route::delete('calendar/delete/{id}', 'CalendarController@delete')->name('calendar.delete');
+
+        // Leave form
+        Route::get('/leave-form/wait', 'LeaveFormController@waiting')->name('leave-form.wait');
+        Route::post('/leave-form/action', 'LeaveFormController@action')->name('leave-form.action');
+
+        // Salary advance
+        Route::get('/salary/advance', 'SalaryController@index')->name('salary.advance');
+    });
 });

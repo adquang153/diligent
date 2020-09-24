@@ -30,6 +30,13 @@ class UserService{
         return $list;
     }
 
+    public function detail($id){
+        $user = User::find($id);
+        if(!$user)
+            abort(404);
+        return $user;
+    }
+
 }
 
 ?>

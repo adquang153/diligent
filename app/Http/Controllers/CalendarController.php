@@ -19,7 +19,11 @@ class CalendarController extends Controller
     }   
     
     public function index(){
-        $list = $this->calendar->list();
+        $user = \Auth::user();
+        if($user->user_type == \App\Models\User::MANAGER)
+            $list = $this->calendar->list();
+        else
+            $list = $this->calendar->listByMember($user->id);
         return view('view.calendar.index', compact('list'));
     }
 

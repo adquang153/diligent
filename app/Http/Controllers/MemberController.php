@@ -34,4 +34,9 @@ class MemberController extends Controller
         return view('view.member.profile');
     }
 
+    public function profile($id){
+        $user = $this->user->detail($id);
+        return view('view.member.profile', compact('user'));
+    }
+
 }

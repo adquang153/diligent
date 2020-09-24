@@ -4,11 +4,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <form class="card" action="http://localhost:8000/leave-form/action" method="POST">
-            @csrf    
+            <form class="card" action="" method="POST">
+            @csrf
                <div class="card-header">
-                <h3 class="card-title">Danh sách nhân viên</h3>
+                <h3 class="card-title">Danh sách ứng lương đang chờ</h3>
                 <div class="card-tools">
+                <button class="btn btn-info btn-sm" value="approval" name="type">Duyệt <i class="fas fa-check"></i></button>
                   <button class="btn btn-danger btn-sm" value="delete" name="type">Xóa <i class="fa fa-trash"></i></button>
                 </div>
               </div>
@@ -21,8 +22,7 @@
                       <th>#</th>
                       <th>Ảnh</th>
                       <th>Nhân viên</th>
-                      <th>Email</th>
-                      <th>Chức vụ</th>
+                      <th>Số tiền</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -31,10 +31,9 @@
                         <tr>
                             <td><input type="checkbox" name="id[]" value="{{$item->id}}"></td>
                             <td>{{++$index}}</td>
-                            <td><img src="{{asset($item->avatar ?? 'images/user.png')}}" class="avt-40" alt="avatar"></td>
-                            <td>{{$item->full_name}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{optional($item->contract)->role}}</td>
+                            <td><img src="{{asset($item->user->avatar ?? 'images/user.png')}}" class="avt-40" alt="avatar"></td>
+                            <td>{{$item->user->full_name}}</td>
+                            <td>{{number_format($item->amount)}}</td>
                         </tr>
                         @endforeach
                     @endif

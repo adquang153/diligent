@@ -1,7 +1,7 @@
 @extends('view.layouts.base')
 
 @section('content')
-<?php $user = auth()->user(); ?>
+<?php $user = $user ?? auth()->user(); ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 d-flex align-items-stretch">

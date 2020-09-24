@@ -43,15 +43,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('member.index')}}" class="nav-link" data-active="member/index">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách nhân viên</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{route('member.create')}}" class="nav-link" data-active="member/create">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cấp tài khoản</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('member.index')}}" class="nav-link" data-active="member/index">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách nhân viên</p>
                 </a>
               </li>
             </ul>
@@ -65,11 +65,12 @@
               </p>
             </a>
           </li>
+          @if(auth()->user()->user_type == \App\Models\User::MEMBER)
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Quản lý nghỉ phép
+                Quản lý đơn
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -80,16 +81,63 @@
                   <p>Viết đơn nghỉ phép</p>
                 </a>
               </li>
-              @if(auth()->user()->user_type == \App\Models\User::MANAGER)
+              <li class="nav-item">
+                <a href="{{route('leave-form.create')}}" class="nav-link" data-active="abc">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Xin ứng lương</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
+          @if(auth()->user()->user_type == \App\Models\User::MANAGER)
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Quản lý nghỉ phép
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('leave-form.wait')}}" class="nav-link" data-active="leave-form/wait">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Danh sách chờ</p>
+                  <p>Đang chờ</p>
                 </a>
               </li>
-              @endif
+              <li class="nav-item">
+                <a href="" class="nav-link" data-active="abc">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Đã duyệt</p>
+                </a>
+              </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Nhân viên ứng lương
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('salary.advance')}}" class="nav-link" data-active="salary/advance">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Đang chờ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link" data-active="">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Đã duyệt</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
           <li class="nav-item has-treeview">
             <a href="javascript:void(0)" class="nav-link">
               <!-- <i class="nav-icon fas fa-money-check-alt"></i> -->

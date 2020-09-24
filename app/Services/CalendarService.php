@@ -30,6 +30,18 @@ class CalendarService{
         return $arr;
     }
 
+    public function listByMember($user_id){
+        $select = \DB::raw("workday, Count(calendars.id) as count");
+        $list = Calendar::select($select)
+                            ->whereBetween('workday', [Date('Y-m-01'), Date('Y-m-t')])
+                            ->where('works.user_id', $user_id)
+                            ->leftJoin('works', 'works.calendar_id', 'calendars.id')
+                            ->distinct('workday')
+                            ->groupBy('workday')
+                            ->get();
+        return $list;
+    }
+
     public function getWorkByDate($date){
         if( $date < Date('Y-m-01') || $date > Date('Y-m-t') ){
             abort(404);

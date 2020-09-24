@@ -3,18 +3,25 @@
 @section('title', 'Ngày: '. Date('d/m/Y', strtotime($date)))
 
 @section('content')
+<?php $user = Auth::user(); ?>
 <div class="container-fluid">
     <div class="row mb-3">
         <div class="col">
         @if($date >= Date('Y-m-d'))
             <a href="{{route('calendar.create', $date)}}" class="btn btn-primary mb-3"><i class="fas fa-plus mr-1"></i> Thêm ca</a>
         @endif
-            <h5>Tổng: {{count($list ?? [])}} ca</h5>
+        @if($user->user_type == \App\Models\User::MANAGER)
+            <h5>Tổng: {{count($list ?? [])}} ca làm việc</h5>
+        @endif
         </div>
     </div>
     @if(!empty($list) && count($list))
     <div class="row">
         @foreach($list as $item)
+        @if( 
+            $user->user_type === \App\Models\User::MANAGER || 
+            ($user->user_type === \App\Models\User::MEMBER && in_array($user->id, $item->members()->pluck('users.id')->toArray() )) 
+        )
         <div class="col-6">
             <div class="card collapsed-card">
                 <div class="card-header">
@@ -69,6 +76,7 @@
             <!-- end card -->
         </div>
         <!-- end col -->
+        @endif
         @endforeach
     </div>
     @else
