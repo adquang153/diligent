@@ -12,13 +12,13 @@ class LeaveFormService{
         return LeaveForm::create($data);
     }
 
-    public function listWaiting(){
-        $list = LeaveForm::with('user')->where('status', 0)->paginate(10);
-        return $list;
+    public function list(){
+        $list = LeaveForm::with('user')->orderBy('created_at','desc');
+        return $list->paginate(10);
     }
 
     public function actionForm($data){
-        $list = LeaveForm::select('id')->whereIn('id', $data['id']);
+        $list = LeaveForm::select(['id','status'])->whereIn('id', $data['id']);
         if($data['type'] === 'delete')
             return $list->delete();
         $list = $list->get();

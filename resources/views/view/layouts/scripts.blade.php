@@ -27,5 +27,10 @@
         });
         if($('.nav-sidebar > li').find('a.active').length === 0)
             $('.nav-sidebar > li > a:first').addClass('active');
+        $('.redirect').on('dblclick', function(){
+            let url = $(this).attr('data-url');
+            if(url)
+                window.location = url;
+        });
     });
 </script>

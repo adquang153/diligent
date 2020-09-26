@@ -33,7 +33,11 @@
     <!-- Content Header (Page header) -->
     @if(session()->get('success') || session()->get('error'))
     <div class="alert alert-{{session()->get('success') ? 'info' : 'danger'}} alert-global mx-3 mt-2" role="alert">
+      @if(session()->get('success'))
       <i class="fas fa-check mr-2"></i>
+      @else
+      <i class="fas fa-exclamation-circle"></i>
+      @endif
       {{session()->get('success') ?? session()->get('error')}}
       <a href="javascript:document.querySelector('.alert-global').remove()" class="float-right"><i class="fa fa-times" aria-hidden="true"></i></a>
     </div>
@@ -43,7 +47,7 @@
       <!-- Main content -->
       <div class="container-fluid pb-1">
         <div class="title">
-          <h3>@yield('title', 'Manager')</h3>
+          <h3>@yield('title', 'Quản lý')</h3>
         </div>
       </div>
     </div>

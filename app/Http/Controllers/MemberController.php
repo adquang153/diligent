@@ -39,4 +39,14 @@ class MemberController extends Controller
         return view('view.member.profile', compact('user'));
     }
 
+    public function delete(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+        $result = $this->user->delete($request->id);
+        if($result)
+            return redirect()->back()->with('success', 'Xóa nhân viên thành công!');
+        return redirect()->back()->with('error', 'Xóa nhân viên không thành công!');
+    }
+
 }

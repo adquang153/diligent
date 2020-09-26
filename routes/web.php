@@ -25,27 +25,36 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
     // Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
     Route::get('calendar/{date}', 'CalendarController@info')->name('calendar.info');
-   
-
-    // Member
-    Route::get('/me', 'MemberController@me')->name('member.me');
 
     // Leave form
     Route::get('/leave-form', 'LeaveFormController@index')->name('leave-form');
-    Route::get('/leave-form/create', 'LeaveFormController@create')->name('leave-form.create');
-    Route::post('/leave-form/store', 'LeaveFormController@store')->name('leave-form.store');
 
     // Work
-    Route::post('/work/diligent', 'WorkController@diligent')->name('work.diligent');
     Route::get('/works', 'WorkController@index')->name('work.index');
 
-    Route::middleware('manager')->group(function(){
+    Route::middleware('authen:member')->group(function(){
+        // Member
+        Route::get('/me', 'MemberController@me')->name('member.me');
+
+        // Work
+        Route::post('/work/diligent', 'WorkController@diligent')->name('work.diligent');
+
+        // Leave form
+        Route::get('/leave-form/create', 'LeaveFormController@create')->name('leave-form.create');
+        Route::post('/leave-form/store', 'LeaveFormController@store')->name('leave-form.store');
+
+        // Salary
+        Route::get('/salary/create', 'SalaryController@create')->name('salary.create');
+        Route::post('/salary/store', 'SalaryController@store')->name('salary.store');
+    });
+    Route::middleware('authen:manager')->group(function(){
         
         // Member
         Route::get('/member/index', 'MemberController@index')->name('member.index');
         Route::get('/member/create', 'MemberController@create')->name('member.create');
         Route::post('/member/store', 'MemberController@store')->name('member.store');
         Route::get('/member/profile/{id}', 'MemberController@profile')->name('member.profile');
+        Route::post('/member/delete', 'MemberController@delete')->name('member.delete');
 
         // Calendar
         Route::get('calendar/edit/{id}', 'CalendarController@edit')->name('calendar.edit');
@@ -60,5 +69,6 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
 
         // Salary advance
         Route::get('/salary/advance', 'SalaryController@index')->name('salary.advance');
+        Route::post('/salary/action', 'SalaryController@action')->name('salary.action');
     });
 });

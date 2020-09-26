@@ -92,12 +92,27 @@ class User extends Authenticatable
         return -1;
     }
 
-    public function leaveForm(){
-        return $this->hasOne('App\Models\LeaveForm');
+    public function leave_forms(){
+        return $this->hasMany('App\Models\LeaveForm');
     }
 
     public function contract(){
         return $this->hasOne('App\Models\Contract');
+    }
+
+    public function salary_advance(){
+        return $this->hasMany('App\Models\SalaryAdvance');
+    }
+
+    public function getSalaryAdvanceAttribute(){
+        $salary = optional($this->contract)->salary ?? 0;
+        $money = $salary / 30;
+        $money_total = $money * $this->work_info()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count();
+        return $money_total;
+    }
+    
+    public function checkSalaryInMonth(){
+        return $this->salary_advance()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count();
     }
 
 }

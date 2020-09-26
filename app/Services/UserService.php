@@ -37,6 +37,11 @@ class UserService{
         return $user;
     }
 
+    public function delete($ids){
+        $list = User::select('id')->whereIn('id', $ids);
+        return $list->delete();
+    }
+
 }
 
 ?>

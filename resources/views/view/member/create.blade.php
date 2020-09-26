@@ -1,5 +1,7 @@
 @extends('view.layouts.base')
 
+@section('title', 'Quản lý nhân viên')
+
 @section('content')
 
 <div class="container">

@@ -1,5 +1,7 @@
 @extends('view.layouts.base')
 
+@section('title', 'Thông tin cá nhân')
+
 @section('content')
 <?php $user = $user ?? auth()->user(); ?>
 <div class="container-fluid">

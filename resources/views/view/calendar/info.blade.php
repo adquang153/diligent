@@ -59,6 +59,7 @@
                     @endif
                 </div>
                 <!-- /.card-body -->
+                @if(auth()->user()->user_type == \App\Models\User::MANAGER)
                 <div class="card-footer clearfix">
                     <div class="d-flex justify-content-between">
                         <a href="javascript:void(0)" class="btn btn-danger btn-sm del-work"><i class="fa fa-trash mr-1"></i> Xóa ca</a>
@@ -72,6 +73,7 @@
                         @endif
                     </div>
                 </div>
+                @endif
             </div>
             <!-- end card -->
         </div>

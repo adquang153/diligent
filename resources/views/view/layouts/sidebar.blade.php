@@ -82,7 +82,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('leave-form.create')}}" class="nav-link" data-active="abc">
+                <a href="{{route('salary.create')}}" class="nav-link" data-active="salary/create">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Xin ứng lương</p>
                 </a>
@@ -91,51 +91,21 @@
           </li>
           @endif
           @if(auth()->user()->user_type == \App\Models\User::MANAGER)
-          <li class="nav-item has-treeview">
-            <a href="javascript:void(0)" class="nav-link">
+          <li class="nav-item">
+            <a href="{{route('leave-form.wait')}}" class="nav-link" data-active="leave-form/wait">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Quản lý nghỉ phép
-                <i class="right fas fa-angle-left"></i>
+                Danh sách nghỉ phép
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('leave-form.wait')}}" class="nav-link" data-active="leave-form/wait">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Đang chờ</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link" data-active="abc">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Đã duyệt</p>
-                </a>
-              </li>
-            </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="javascript:void(0)" class="nav-link">
+          <li class="nav-item">
+            <a href="{{route('salary.advance')}}" class="nav-link" data-active="salary/advance">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Nhân viên ứng lương
-                <i class="right fas fa-angle-left"></i>
+                Danh sách ứng lương
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('salary.advance')}}" class="nav-link" data-active="salary/advance">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Đang chờ</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link" data-active="">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Đã duyệt</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @endif
           <li class="nav-item has-treeview">

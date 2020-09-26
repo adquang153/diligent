@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\WorkService;
+use App\Models\User;
 
 class WorkController extends Controller
 {
@@ -15,6 +16,10 @@ class WorkController extends Controller
     }
 
     public function index(){
+        if(auth()->user()->user_type == User::MANAGER){
+            $list = $this->work->listDiligent();
+            return view('view.work.index', compact('list'));
+        }
         return view('view.work.index');
     }
 

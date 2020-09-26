@@ -5,6 +5,7 @@ namespace App\Services;
 use Auth;
 use App\Models\WorkInfo;
 use App\Models\Work;
+use App\Models\User;
 
 class WorkService{
 
@@ -34,6 +35,11 @@ class WorkService{
             return $work;
         }
         return false;
+    }
+
+    public function listDiligent(){
+        $list = User::where('user_type', User::MEMBER)->paginate(10);
+        return $list;
     }
 
 }

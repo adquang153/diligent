@@ -26,7 +26,7 @@ class LeaveFormController extends Controller
     }
 
     public function waiting(){
-        $list = $this->leaveForm->listWaiting();
+        $list = $this->leaveForm->list();
         return view('view.leave-form.waiting', compact('list'));
     }
 
@@ -39,11 +39,11 @@ class LeaveFormController extends Controller
         if($request->type === 'delete'){
             if($result)
                 return redirect()->route('leave-form.wait')->with('success', 'Xóa đơn nghỉ phép thành công!');
-            return redirect()->route('leave-form.wait')->with('leave-form.wait', 'Xóa đơn nghỉ phép không thành công!');
+            return redirect()->route('leave-form.wait')->with('error', 'Xóa đơn nghỉ phép không thành công!');
         }
         if($result)
             return redirect()->route('leave-form.wait')->with('success', 'Duyệt đơn nghỉ phép thành công!');
-        return redirect()->route('leave-form.wait')->with('leave-form.wait', 'Duyệt đơn nghỉ phép không thành công!');
+        return redirect()->route('leave-form.wait')->with('error', 'Duyệt đơn nghỉ phép không thành công!');
     }
 
 }

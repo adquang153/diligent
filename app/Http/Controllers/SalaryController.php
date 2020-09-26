@@ -21,7 +21,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $list = $this->salary->advance();
+        $list = $this->salary->advance('wait');
         return view('view.salary.advance', compact('list'));
     }
 
@@ -32,7 +32,7 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('view.salary.create');
     }
 
     /**
@@ -43,7 +43,22 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'content' => 'required|string'
+        ]);
+        $user = \Auth::user();
+        if( !$user->checkSalaryInMonth() ){
+            if( !$user->salaryAdvance )
+                return redirect()->back()->with('error', 'Không thể ứng lương khi mức lương bằng 0')->withInput();
+            $result = $user->salary_advance()->create([
+                'content' => $request->content,
+                'amount' => $user->salaryAdvance
+            ]);
+            if($result)
+                return redirect()->route('dashboard')->with('success', 'Đã gửi yêu cầu ứng lương đến quản lý!');
+            return redirect()->back()->with('error', 'Yêu cầu ứng lương không thành công!')->withInput();
+        }
+        return redirect()->back()->with('error', 'Bạn đã ứng lương tháng này!')->withInput();
     }
 
     /**
@@ -89,5 +104,21 @@ class SalaryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function action(Request $request){
+        $request->validate([
+            'id' => 'required',
+            'type' => 'required|in:approval,delete'
+        ]);
+        $result = $this->salary->actionForm($request->all());
+        if($request->type === 'delete'){
+            if($result)
+                return redirect()->back()->with('success', 'Xóa đơn nghỉ phép thành công!');
+            return redirect()->back()->with('error', 'Xóa đơn nghỉ phép không thành công!');
+        }
+        if($result)
+            return redirect()->back()->with('success', 'Duyệt đơn nghỉ phép thành công!');
+        return redirect()->back()->with('error', 'Duyệt đơn nghỉ phép không thành công!');
     }
 }

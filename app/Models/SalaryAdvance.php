@@ -10,7 +10,7 @@ class SalaryAdvance extends Model
     use HasFactory;
 
     protected $table = 'salary_advance';
-    protected $fillable = ['user_id', 'amount', 'status'];
+    protected $fillable = ['user_id', 'amount', 'status', 'content'];
 
     public function user(){
         return $this->belongsTo('App\Models\User');
