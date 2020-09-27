@@ -68,7 +68,7 @@
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
                         <button class="btn btn-secondary btn-sm">Hủy</button>
-                        <button class="btn btn-info btn-sm">Tạo ca</button>
+                        <button class="btn btn-info btn-sm">Sửa ca</button>
                     </div>
                 </div>
             </form>
