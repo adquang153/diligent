@@ -26,7 +26,9 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
+					  @if($checkManager)
                       <th></th>
+					  @endif
                       <th>#</th>
                       @if($checkManager)
                       <th class="text-center">Nhân viên</th>
