@@ -59,7 +59,7 @@ class MemberController extends Controller
         $result = $this->user->changePassword($request->all());
         if($result)
             return redirect()->route('dashboard')->with('success', 'Đổi mật khẩu thành công!');
-        return redirect()->back()->with('error', 'Đổi mật khẩu không thành công!');
+        return redirect()->back()->with('error', 'Mật khẩu cũ không đúng!');
     }
 
     public function editProfile($id){

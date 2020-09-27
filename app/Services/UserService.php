@@ -47,7 +47,7 @@ class UserService{
         $value = Hash::check($data['new_password'], $user->password);
         if($value){
             $user->update([
-                'password' => $data['new_password']
+                'password' => Hash::make($data['new_password'])
             ]);
             return true;
         }
