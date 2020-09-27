@@ -114,11 +114,11 @@ class SalaryController extends Controller
         $result = $this->salary->actionForm($request->all());
         if($request->type === 'delete'){
             if($result)
-                return redirect()->back()->with('success', 'Xóa đơn nghỉ phép thành công!');
-            return redirect()->back()->with('error', 'Xóa đơn nghỉ phép không thành công!');
+                return redirect()->back()->with('success', 'Xóa yêu cầu ứng lương phép thành công!');
+            return redirect()->back()->with('error', 'Xóa yêu cầu ứng lương không thành công!');
         }
         if($result)
-            return redirect()->back()->with('success', 'Duyệt đơn nghỉ phép thành công!');
-        return redirect()->back()->with('error', 'Duyệt đơn nghỉ phép không thành công!');
+            return redirect()->back()->with('success', 'Duyệt yêu cầu ứng lương thành công!');
+        return redirect()->back()->with('error', 'Duyệt yêu cầu ứng lương thành công!');
     }
 }
