@@ -5,7 +5,7 @@
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8"> -->
-      <span class="brand-text font-weight-normal h4">DG Management</span>
+      <span class="brand-text font-weight-normal h4">Trang Quản Lý</span>
     </a>
 
     <!-- Sidebar -->
@@ -70,7 +70,7 @@
             <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Quản lý đơn
+                Đơn nghỉ phép
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -78,13 +78,36 @@
               <li class="nav-item">
                 <a href="{{route('leave-form.create')}}" class="nav-link" data-active="leave-form/create">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Viết đơn nghỉ phép</p>
+                  <p>Viết đơn</p>
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('leave-form.wait')}}" class="nav-link" data-active="leave-form/wait">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Đơn đã gửi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="javascript:void(0)" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Yêu cầu ứng lương
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
                 <a href="{{route('salary.create')}}" class="nav-link" data-active="salary/create">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Xin ứng lương</p>
+                  <p>Gửi yêu cầu</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('salary.advance')}}" class="nav-link" data-active="salary/advance">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Đã gửi</p>
                 </a>
               </li>
             </ul>

@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-12 d-flex align-items-stretch">
             <div class="card bg-light w-100">
-            <div class="card-header text-muted border-bottom-0">
-                {{optional($user->contract)->role}}
+            <div class="card-header text-muted border-bottom">
+                <h4 class="mb-0">{{optional($user->contract)->role}}</h4>
             </div>
-            <div class="card-body pt-0">
+            <div class="card-body pt-3">
                 <div class="row">
                 <div class="col-7">
                     <h2 class="lead"><b>{{$user->full_name}}</b></h2>
@@ -35,16 +35,16 @@
                 </div>
                 </div>
             </div>
+            
+            @if(auth()->user()->user_type == \App\Models\User::MANAGER)
             <div class="card-footer">
                 <div class="text-right">
-                <a href="#" class="btn btn-sm bg-teal">
-                    <i class="fas fa-comments"></i>
-                </a>
-                <a href="#" class="btn btn-sm btn-primary">
-                    <i class="fas fa-user"></i> Sửa
-                </a>
+                    <a href="{{route('member.edit', $user->id)}}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-user"></i> Sửa
+                    </a>
                 </div>
             </div>
+            @endif
             </div>
         </div>
     </div>

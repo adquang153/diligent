@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\Services\UserService;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ProfileRequest;
 
 class MemberController extends Controller
 {
@@ -47,6 +49,30 @@ class MemberController extends Controller
         if($result)
             return redirect()->back()->with('success', 'Xóa nhân viên thành công!');
         return redirect()->back()->with('error', 'Xóa nhân viên không thành công!');
+    }
+
+    public function changePassword(){
+        return view('view.member.change-password');
+    }
+
+    public function changePasswordConfirm(ChangePasswordRequest $request){
+        $result = $this->user->changePassword($request->all());
+        if($result)
+            return redirect()->route('dashboard')->with('success', 'Đổi mật khẩu thành công!');
+        return redirect()->back()->with('error', 'Đổi mật khẩu không thành công!');
+    }
+
+    public function editProfile($id){
+        $user = $this->user->detail($id);
+        return view('view.member.edit', compact('user'));
+    }
+
+    public function updateProfile($id, ProfileRequest $request){
+        $result = $this->user->updateProfile($id, $request->all());
+
+        if($result)
+            return redirect()->route('dashboard')->with('success', 'Cập nhật thành công!');
+        return redirect()->back()->with('error', 'Cập nhật không thành công!');
     }
 
 }

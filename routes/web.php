@@ -28,10 +28,19 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
 
     // Leave form
     Route::get('/leave-form', 'LeaveFormController@index')->name('leave-form');
+    Route::get('/leave-form/wait', 'LeaveFormController@waiting')->name('leave-form.wait');
+    
 
+    // Change passwor
+    Route::get('/change-password', 'MemberController@changePassword')->name('change-password');
+    Route::post('/change-password/confirm', 'MemberController@changePasswordConfirm')->name('change-password.confirm');
     // Work
     Route::get('/works', 'WorkController@index')->name('work.index');
 
+    // Salary advance
+    Route::get('/salary/advance', 'SalaryController@index')->name('salary.advance');
+
+    
     Route::middleware('authen:member')->group(function(){
         // Member
         Route::get('/me', 'MemberController@me')->name('member.me');
@@ -42,7 +51,7 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
         // Leave form
         Route::get('/leave-form/create', 'LeaveFormController@create')->name('leave-form.create');
         Route::post('/leave-form/store', 'LeaveFormController@store')->name('leave-form.store');
-
+        
         // Salary
         Route::get('/salary/create', 'SalaryController@create')->name('salary.create');
         Route::post('/salary/store', 'SalaryController@store')->name('salary.store');
@@ -55,7 +64,9 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
         Route::post('/member/store', 'MemberController@store')->name('member.store');
         Route::get('/member/profile/{id}', 'MemberController@profile')->name('member.profile');
         Route::post('/member/delete', 'MemberController@delete')->name('member.delete');
-
+        Route::get('/member/edit/{id}', 'MemberController@editProfile')->name('member.edit');
+        Route::post('/member/update/{id}', 'MemberController@updateProfile')->name('member.update');
+    
         // Calendar
         Route::get('calendar/edit/{id}', 'CalendarController@edit')->name('calendar.edit');
         Route::get('calendar/{date}/create', 'CalendarController@create')->name('calendar.create');
@@ -64,11 +75,9 @@ Route::middleware('auth')->namespace('App\Http\Controllers')->group(function(){
         Route::delete('calendar/delete/{id}', 'CalendarController@delete')->name('calendar.delete');
 
         // Leave form
-        Route::get('/leave-form/wait', 'LeaveFormController@waiting')->name('leave-form.wait');
         Route::post('/leave-form/action', 'LeaveFormController@action')->name('leave-form.action');
-
-        // Salary advance
-        Route::get('/salary/advance', 'SalaryController@index')->name('salary.advance');
+        
+        // Salary
         Route::post('/salary/action', 'SalaryController@action')->name('salary.action');
     });
 });

@@ -47,23 +47,36 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Nhân viên</th>
-                      <th>Email</th>
-                      <th>Số ca đã làm</th>
-                      <th>Số đơn nghỉ phép</th>
-                      <th>Lương tháng này</th>
+                      <th class="text-center">Nhân viên</th>
+                      <th class="text-center">Email</th>
+                      <th class="text-center">Số ca đã làm</th>
+                      <th class="text-center">Số đơn nghỉ phép</th>
+                      <th class="text-center">Lương đã ứng</th>
+                      <th class="text-center">Lương tháng này</th>
+                      <th class="text-center">Lương nhận được</th>
                     </tr>
                   </thead>
                   <tbody>
                     @if(!empty($list) && count($list))
                         @foreach($list as $index=>$item)
                         <tr>
-                            <td>{{++$index}}</td>
-                            <td>{{$item->full_name}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->work_info()->count()}}</td>
-                            <td>{{$item->leave_forms()->count()}}</td>
-                            <td>{{$item->salaryAdvance}}</td>
+                            <td class="text-center">{{++$index}}</td>
+                            <td class="text-center">{{$item->full_name}}</td>
+                            <td class="text-center">{{$item->email}}</td>
+                            <td class="text-center">{{$item->work_info()->count()}}</td>
+                            <td class="text-center">{{$item->leave_forms()->count()}}</td>
+                            <td class="text-center">
+                            <?php 
+                                $money = $item->salary_advance()
+                                                ->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])
+                                                ->where('status', 1)
+                                                ->first();
+                            ?>
+                            {{ number_format( $money->amount ?? 0, 2, '.', ',') }}
+                            </td>
+                            <td class="text-center">{{ number_format($item->salaryAdvance, 2, '.', ',')}} <sup>đ</sup> </td>
+                            <?php $totalMoney = $item->salaryAdvance - ($money->amount ?? 0); ?>
+                            <td class="text-center font-weight-bold text-danger">{{ number_format($totalMoney, 2, '.', ',')}} <sup>đ</sup> </td>
                         </tr>
                         @endforeach
                     @endif

@@ -42,6 +42,36 @@ class UserService{
         return $list->delete();
     }
 
+    public function changePassword($data){
+        $user = \Auth::user();
+        $value = Hash::check($data['new_password'], $user->password);
+        if($value){
+            $user->update([
+                'password' => $data['new_password']
+            ]);
+            return true;
+        }
+        return false;
+    }
+
+    public function updateProfile($id, $data){
+        unset($data['_token']);
+        $user = User::find($id);
+        if($user){
+            $user->update(
+                $data
+            );
+            $user->contract()->update([
+                'role' => $data['role'],
+                'salary' => $data['salary'],
+                'date_start' => $data['date_start'],
+                'date_end' => $data['date_end']
+            ]);
+            return true;
+        }
+        return false;
+    }
+
 }
 
 ?>

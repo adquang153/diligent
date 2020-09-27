@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\LeaveForm;
+use App\Models\User;
 
 class LeaveFormService{
 
@@ -13,8 +14,12 @@ class LeaveFormService{
     }
 
     public function list(){
-        $list = LeaveForm::with('user')->orderBy('created_at','desc');
-        return $list->paginate(10);
+        $user = \Auth::user();
+        if($user->user_type == User::MANAGER)
+            $list = LeaveForm::with('user');
+        else
+            $list = LeaveForm::where('user_id', $user->id);
+        return $list->orderBy('created_at','desc')->paginate(10);
     }
 
     public function actionForm($data){

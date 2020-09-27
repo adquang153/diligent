@@ -15,13 +15,17 @@
           <i class="fas fa-cogs"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
+         
           @if(auth()->user()->user_type == \App\Models\User::MEMBER)
           <a href="{{route('member.me')}}" class="dropdown-item text-left">
-            Profile
+            Trang cá nhân
           </a>
           @endif
+          <a href="{{route('change-password')}}" class="dropdown-item text-left">
+            Đổi mật khẩu
+          </a>
           <a href="javascript:document.querySelector('#logout-form').submit()" class="dropdown-item text-left">
-            Logout
+            Đăng xuất
             <i class="fas fa-sign-out-alt ml-2"></i>
           </a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
