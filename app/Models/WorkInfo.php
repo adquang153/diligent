@@ -16,6 +16,6 @@ class WorkInfo extends Model
         return $this->belongsTo('App\Models\User');
     }
     public function work(){
-        return $this->belongsTo('App\Models\Works', 'work_id');
+        return $this->belongsTo('App\Models\Work', 'work_id');
     }
 }
