@@ -63,8 +63,8 @@
                             <td class="text-center">{{++$index}}</td>
                             <td class="text-center">{{$item->full_name}}</td>
                             <td class="text-center">{{$item->email}}</td>
-                            <td class="text-center">{{$item->work_info()->count()}}</td>
-                            <td class="text-center">{{$item->leave_forms()->count()}}</td>
+                            <td class="text-center">{{$item->work_info()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count()}}</td>
+                            <td class="text-center">{{$item->leave_forms()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count()}}</td>
                             <td class="text-center">
                             <?php 
                                 $money = $item->salary_advance()
