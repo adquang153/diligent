@@ -42,16 +42,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Chức vụ') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Loại tài khoản') }}</label>
 
                             <div class="col-md-6">
-                                <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
-
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                               <select name="user_type" id="user_type" class="form-control @error('email') is-invalid @enderror" id="">
+                                   <option value="member">Nhân viên</option>
+                                   <option value="manager" {{old('user_type') === 'manager' ? 'selected' : ''}}>Quản trị viên</option>
+                               </select>
                             </div>
                         </div>
 
@@ -76,44 +73,48 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Loại tài khoản') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Chức vụ') }}</label>
 
                             <div class="col-md-6">
-                               <select name="user_type" class="form-control @error('email') is-invalid @enderror" id="">
-                                   <option value="manager">Quản lý</option>
-                                   <option value="member" {{old('user_type') === 'member' ? 'selected' : ''}}>Nhân viên</option>
-                               </select>
+                                <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" autocomplete="role">
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Mức lương') }}</label>
 
                             <div class="col-md-6">
                                 <label for="salary" class="d-flex align-items-center">
-                                    <input type="number" min="0" id="salary" name="salary" value="{{old('salary')}}" class="form-control d-inline mr-2 w-50"> <sup>đ</sup> / Tháng
+                                    <input id="salary" type="number" min="0" id="salary" name="salary" value="{{old('salary')}}" class="form-control d-inline mr-2 w-50"> <sup>đ</sup> / Tháng
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="contract">
                             <label for="password-confirm" class="col-md-6 col-form-label text-center">{{ __('Thời hạn hợp đồng:') }}</label>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Từ') }}</label>
-
-                            <div class="col-md-6">
-                                <label class="d-flex align-items-center">
-                                    <input type="date" name="date_start" value="{{old('date_start')}}" class="form-control d-inline mr-2 w-50">
-                                </label>
+                            <div class="col-12 row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Từ') }}</label>
+                                <div class="col-md-6">
+                                    <label class="d-flex align-items-center">
+                                        <input type="date" name="date_start" value="{{old('date_start')}}" class="form-control d-inline mr-2 w-50">
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Đến') }}</label>
+                            <div class="col-12 row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Đến') }}</label>
 
-                            <div class="col-md-6">
-                                <label class="d-flex align-items-center">
-                                    <input type="date" name="date_end" value="{{old('date_end')}}" class="form-control d-inline mr-2 w-50">
-                                </label>
+                                <div class="col-md-6">
+                                    <label class="d-flex align-items-center">
+                                        <input type="date" name="date_end" value="{{old('date_end')}}" class="form-control d-inline mr-2 w-50">
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -131,4 +132,27 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+
+    $(function(){
+        function check(value){
+            if( value === 'manager' ){
+                $('#role').parents('.form-group').fadeOut(500);
+                $('#salary').parents('.form-group').fadeOut(500);
+                $('#contract').fadeOut(500);
+            }else{
+                $('#role').parents('.form-group').fadeIn(500);
+                $('#salary').parents('.form-group').fadeIn(500);
+                $('#contract').fadeIn(500);
+            }
+        }
+        check($('#user_type').val());
+        $('#user_type').on('change', function(){
+            check($(this).val());
+        });
+    });
+</script>
 @endsection

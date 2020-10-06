@@ -21,7 +21,7 @@ class Manager
         if(auth()->user()->user_type === $user_type)
             return $next($request);
         if($user_type == User::MANAGER)
-            $type = 'quản lý';
+            $type = 'quản trị viên';
         else{
             $type = 'nhân viên';
         }

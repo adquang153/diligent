@@ -44,7 +44,7 @@ class User extends Authenticatable
     public function getPositionAttribute()
     {
         if($this->user_type === User::MANAGER){
-            return 'quản lý';
+            return 'quản trị viên';
         }
         return 'nhân viên';
     }
@@ -106,7 +106,7 @@ class User extends Authenticatable
 
     public function getSalaryAdvanceAttribute(){
         $salary = optional($this->contract)->salary ?? 0;
-        $money = $salary / 30;
+        $money = $salary / 26;
         $money_total = $money * $this->work_info()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count();
         return $money_total;
     }

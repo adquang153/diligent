@@ -10,7 +10,7 @@ class UserService{
     public function create($data){
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        if($user){
+        if($user && $user->user_type != User::MANAGER){
             return $user->contract()->create([
                 'role' => $data['role'],
                 'salary' => $data['salary'],
@@ -18,7 +18,7 @@ class UserService{
                 'date_end' => $data['date_end']
             ]);
         }
-        return false;
+        return $user;
     }
 
     public function getAll($params=[]){
