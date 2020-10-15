@@ -16,7 +16,7 @@
                         <div class="form-group row">
                             <label for="amount" class="col-sm-2 col-form-label">Số tiền</label>
                             <div class="col-sm-10 d-flex align-items-center">
-                                <p class="mb-0">{{number_format(auth()->user()->salaryAdvance, 2, '.', ',')}} <sup>đ</sup> </p>
+                                <p class="mb-0">{{number_format(auth()->user()->salaryAdvance(Date('m'), Date('Y')), 2, '.', ',')}} <sup>đ</sup> </p>
                             </div>
                         </div>
                         <div class="form-group row">

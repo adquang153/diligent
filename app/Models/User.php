@@ -104,10 +104,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\SalaryAdvance');
     }
 
-    public function getSalaryAdvanceAttribute(){
+    public function salaryAdvance($month, $year){
         $salary = optional($this->contract)->salary ?? 0;
         $money = $salary / 26;
-        $money_total = $money * $this->work_info()->whereBetween('created_at', [Date('Y-m-01'), Date('Y-m-t')])->count();
+        $money_total = $money * $this->work_info()->whereBetween('created_at', [Date("$year-$month-01"), Date("$year-$month-t")])->count();
         return $money_total;
     }
     

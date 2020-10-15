@@ -15,12 +15,18 @@ class WorkController extends Controller
         $this->work = $work;
     }
 
-    public function index(){
+    public function index(Request $request){
         if(auth()->user()->user_type == User::MANAGER){
             $list = $this->work->listDiligent();
-            return view('view.work.index', compact('list'));
         }
-        return view('view.work.index');
+        $year = $request->year ?? Date('Y');
+        $month = $request->month ?? Date('m');
+        $data = [
+            'list' => $list ?? [],
+            'year' => $year,
+            'month' => $month
+        ];
+        return view('view.work.index', $data);
     }
 
     public function diligent(Request $request){
