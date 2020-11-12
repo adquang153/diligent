@@ -46,13 +46,15 @@ class SalaryController extends Controller
         $request->validate([
             'content' => 'required|string'
         ]);
+        $month = Date('m');
+        $year = Date('Y');
         $user = \Auth::user();
         if( !$user->checkSalaryInMonth() ){
-            if( !$user->salaryAdvance )
+            if( !$user->salaryAdvance($month, $year) )
                 return redirect()->back()->with('error', 'Không thể ứng lương khi mức lương bằng 0')->withInput();
             $result = $user->salary_advance()->create([
                 'content' => $request->content,
-                'amount' => $user->salaryAdvance
+                'amount' => $user->salaryAdvance($month, $year)
             ]);
             if($result)
                 return redirect()->route('dashboard')->with('success', 'Đã gửi yêu cầu ứng lương đến quản lý!');
